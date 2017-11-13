@@ -198,8 +198,9 @@ void XbotRos::publishRobotState()
     if ( ros::ok() && (robot_state_publisher.getNumSubscribers() > 0) )
     {
         xbot_msgs::XbotStatePtr msg(new xbot_msgs::XbotState);
+        CoreSensors::Data data = xbot.getCoreSensorData();
         msg->header.stamp = ros::Time::now();
-        msg->power_state = xbot.getPowerState();
+        msg->power_percent = (data.battery_voltage - xbot_msgs::XbotState::MIN_VOLTAGE)*100/(xbot_msgs::XbotState::MAX_VOLTAGE - xbot_msgs::XbotState::MIN_VOLTAGE);
         msg->height_percent = xbot.getHeightPercent();
         msg->cloud_degree = xbot.getPlatformDegree();
         msg->camera_degree = xbot.getCameraDegree();
