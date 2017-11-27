@@ -56,8 +56,8 @@ Xbot::Xbot() :
     , is_alive(false)
     , heading_offset(0.0)
     , HeightPercent(0)
-    , CameraDegree(90)
-    , PlatformDegree(90)
+    , CameraDegree(0)
+    , PlatformDegree(0)
     , Power(1)
 {
 
@@ -404,7 +404,7 @@ void Xbot::setLiftControl(const unsigned char &height_percent)
 
 void Xbot::setCloudCameraControl(const unsigned char &platform_degree, const unsigned char &camera_degree)
 {
-    sendCommand(Command::SetPlatformAndCameraControl(platform_degree,camera_degree));
+    sendCommand(Command::SetPlatformAndCameraControl(platform_degree+90,(camera_degree+45)*2));
     PlatformDegree = platform_degree;
     CameraDegree = camera_degree;
 
@@ -414,7 +414,8 @@ void Xbot::resetXbot()
 {
     setBaseControl(0,0);
     setLiftControl(0);
-    setCloudCameraControl(90,90);
+    setPowerControl(1);
+    setCloudCameraControl(0,0);
 }
 
 void Xbot::sendBaseControlCommand()
