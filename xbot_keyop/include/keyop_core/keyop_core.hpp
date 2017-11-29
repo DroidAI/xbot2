@@ -84,7 +84,7 @@ public:
 private:
   ros::Subscriber keyinput_subscriber;
   ros::Publisher velocity_publisher_;
-  ros::Publisher motor_power_publisher_;
+//  ros::Publisher motor_power_publisher_;
   bool last_zero_vel_sent;
   bool accept_incoming;
   bool power_status;

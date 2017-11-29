@@ -42,7 +42,7 @@
 #include <ecl/time.hpp>
 #include <ecl/exceptions.hpp>
 #include <std_srvs/Empty.h>
-#include <xbot_msgs/MotorPower.h>
+//#include <xbot_msgs/MotoPower.h>
 #include "../include/keyop_core/keyop_core.hpp"
 
 /*****************************************************************************
@@ -112,7 +112,7 @@ bool KeyOpCore::init()
    ** Publishers
    **********************/
   velocity_publisher_ = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1);
-  motor_power_publisher_ = nh.advertise<xbot_msgs::MotorPower>("motor_power", 1);
+//  motor_power_publisher_ = nh.advertise<xbot_msgs::MotorPower>("motor_power", 1);
 
   /*********************
    ** Velocities
@@ -136,11 +136,11 @@ bool KeyOpCore::init()
   bool connected = false;
   while (!connected)
   {
-    if (motor_power_publisher_.getNumSubscribers() > 0)
-    {
-      connected = true;
-      break;
-    }
+//    if (motor_power_publisher_.getNumSubscribers() > 0)
+//    {
+//      connected = true;
+//      break;
+//    }
     if (count == 6)
     {
       connected = false;
@@ -169,9 +169,9 @@ bool KeyOpCore::init()
   }
   else
   {
-    xbot_msgs::MotorPower power_cmd;
-    power_cmd.state = xbot_msgs::MotorPower::ON;
-    motor_power_publisher_.publish(power_cmd);
+//    xbot_msgs::MotorPower power_cmd;
+//    power_cmd.state = xbot_msgs::MotorPower::ON;
+//    motor_power_publisher_.publish(power_cmd);
     ROS_INFO("KeyOp: connected.");
     power_status = true;
   }
@@ -358,9 +358,9 @@ void KeyOpCore::disable()
   if (power_status)
   {
     ROS_INFO("KeyOp: die, die, die (disabling power to the device's motor system).");
-    xbot_msgs::MotorPower power_cmd;
-    power_cmd.state = xbot_msgs::MotorPower::OFF;
-    motor_power_publisher_.publish(power_cmd);
+//    xbot_msgs::MotorPower power_cmd;
+//    power_cmd.state = xbot_msgs::MotorPower::OFF;
+//    motor_power_publisher_.publish(power_cmd);
     power_status = false;
   }
   else
@@ -386,9 +386,9 @@ void KeyOpCore::enable()
   if (!power_status)
   {
     ROS_INFO("KeyOp: Enabling power to the device subsystem.");
-    xbot_msgs::MotorPower power_cmd;
-    power_cmd.state = xbot_msgs::MotorPower::ON;
-    motor_power_publisher_.publish(power_cmd);
+//    xbot_msgs::MotorPower power_cmd;
+//    power_cmd.state = xbot_msgs::MotorPower::ON;
+//    motor_power_publisher_.publish(power_cmd);
     power_status = true;
   }
   else
