@@ -39,22 +39,35 @@ public:
 
   struct Data {
      float battery_voltage;
-     uint16_t rear_left_infred;
-     uint16_t rear_center_infred;
-     uint16_t rear_right_infred;
+
+     float front_left_infred;
+     float front_center_infred;
+     float front_right_infred;
+     float rear_left_infred;
+     float rear_center_infred;
+     float rear_right_infred;
+     float dock_left_infred;
+     float dock_right_infred;
+
      float front_left_current;
      float front_right_current;
      float rear_left_current;
      float rear_right_current;
      float up_down_current;
+
      float front_left_echo;
      float front_center_echo;
      float front_right_echo;
+     float rear_left_echo;
+     float rear_center_echo;
+     float rear_right_echo;
+
      uint16_t front_left_encoder;
      uint16_t front_right_encoder;
      uint16_t rear_left_encoder;
      uint16_t rear_right_encoder;
      uint16_t up_down_encoder;
+
      short acce_x;
      short acce_y;
      short acce_z;
@@ -64,7 +77,7 @@ public:
      short mag_x;
      short mag_y;
      short mag_z;
-     float pressure;
+     short pressure;
      short yaw;
      short pitch;
      short roll;

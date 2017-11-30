@@ -124,7 +124,7 @@ void PacketFinderBase::getPayload(BufferType & bufferRef)
   for (unsigned int i = size_stx + size_length_field; i < buffer.size()  - size_checksum_field; i++) {
     bufferRef.push_back(buffer[i]);
   }
-//  std::cout<<"buffer.size:"<<buffer.size()<<std::endl;
+  std::cout<<"buffer.size:"<<buffer.size()<<std::endl;
 
 //  ofstream outfile("~/debug.txt", ofstream::app);
 //  outfile<<"buffer size:"<<buffer.size()<<endl<<"stx size:"<<size_stx;

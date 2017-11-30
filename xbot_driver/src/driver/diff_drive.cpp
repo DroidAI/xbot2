@@ -33,7 +33,7 @@ DiffDrive::DiffDrive() :
   angular_velocity(0.0), linear_velocity(0.0), // command velocities, in [mm] and [mm/s]
   point_velocity(2,0.0), // command velocities, in [m/s] and [rad/s]
   bias(0.49), // wheelbase, wheel_to_wheel, in [m]
-  wheel_radius(0.095), // radius of main wheel, in [m]
+  wheel_radius(0.10), // radius of main wheel, in [m]
   tick_to_rad(0.0003925740f/2),//xbot1 8000tick/loop, xbot2 32000tick/loop
   diff_drive_kinematics(bias, wheel_radius)
 {}
@@ -137,7 +137,7 @@ void DiffDrive::velocityCommands(const float &vx, const float &wz) {
   // wz: in rad/s
   velocity_mutex.lock();
   linear_velocity = vx;
-  angular_velocity = wz/1.85;
+  angular_velocity = wz;
   velocity_mutex.unlock();
     return;
 }
@@ -152,6 +152,7 @@ std::vector<float> DiffDrive::velocityCommands() {
   std::vector<float> cmd(2);
   cmd[0] = linear_velocity;  // In [m/s]
   cmd[1] = angular_velocity*180/ecl::pi; // In [degree/s]
+//  cmd[1] = angular_velocity; // In [rad/s]
   velocity_mutex.unlock();
   return cmd;
 }

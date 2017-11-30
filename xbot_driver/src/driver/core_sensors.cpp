@@ -63,31 +63,79 @@ bool CoreSensors::deserialise(ecl::PushAndPop<unsigned char> & byteStream)
   unsigned char power_num;//0x01 num of power
   buildVariable(power_num, byteStream);
 //  std::cout<<"power_num:"<<(unsigned int)power_num<<std::endl;
+  uint16_t tempvariable = 0;
 
-  build_special_variable(data.battery_voltage,byteStream);
+  buildVariable(tempvariable,byteStream);
+  data.battery_voltage = tempvariable/100.0;
 //  std::cout<<"power_voltage:"<<data.power_voltage<<std::endl;
-  unsigned char infred_num;//0x03
+  unsigned char infred_num;//0x08
   buildVariable(infred_num, byteStream);
-  buildVariable(data.rear_left_infred,byteStream);
-  buildVariable(data.rear_center_infred,byteStream);
-  std::cout<<"rear_center_infred:"<<data.rear_center_infred<<std::endl;
-  buildVariable(data.rear_right_infred,byteStream);
+//clockwise direction, the left or right is based on the robot face
+  buildVariable(tempvariable,byteStream);
+  data.rear_right_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.rear_center_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.rear_left_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_left_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_center_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_right_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.dock_left_infred = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.dock_right_infred = tempvariable/10000.0;
+//  std::cout<<"rear_center_infred:"<<data.rear_center_infred<<std::endl;
 
   unsigned char current_num;//0x05
   buildVariable(current_num,byteStream);
-  build_special_variable(data.front_left_current,byteStream);
-  build_special_variable(data.front_right_current,byteStream);
-  build_special_variable(data.rear_left_current,byteStream);
-  build_special_variable(data.rear_right_current,byteStream);
-  build_special_variable(data.up_down_current,byteStream);
 
-  unsigned char echo_num;
+  buildVariable(tempvariable,byteStream);
+  data.front_left_current = tempvariable/100.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_right_current = tempvariable/100.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.rear_left_current = tempvariable/100.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.rear_right_current = tempvariable/100.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.up_down_current = tempvariable/100.0;
+
+  unsigned char echo_num;//0x06
   buildVariable(echo_num,byteStream);
-  build_special_variable(data.front_left_echo,byteStream);
-  build_special_variable(data.front_center_echo,byteStream);
-  std::cout<<"front_center_echo:"<<data.front_center_echo<<std::endl;
-  build_special_variable(data.front_right_echo,byteStream);
+//clockwise direction, the left or right is based on the robot face
+  buildVariable(tempvariable,byteStream);
+  data.rear_right_echo = tempvariable/10000.0;
 
+  buildVariable(tempvariable,byteStream);
+  data.rear_center_echo = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.rear_left_echo = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_left_echo = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_center_echo = tempvariable/10000.0;
+
+  buildVariable(tempvariable,byteStream);
+  data.front_right_echo = tempvariable/10000.0;
+
+//  std::cout<<"front_center_echo:"<<data.front_center_echo<<std::endl;
   unsigned char encoder_num;
   buildVariable(encoder_num, byteStream);
   buildVariable(data.front_left_encoder, byteStream);

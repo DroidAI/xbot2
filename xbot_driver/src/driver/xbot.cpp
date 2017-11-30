@@ -205,7 +205,7 @@ void Xbot::spin()
     /*********************
      ** Read Incoming
      **********************/
-    int n = serial.read((char*)buf, 1/*packet_finder.numberOfDataToRead()*/);
+    int n = serial.read((char*)buf, packet_finder.numberOfDataToRead());
 
     if (n == 0)
     {
@@ -239,7 +239,7 @@ void Xbot::spin()
       packet_finder.getPayload(data_buffer);// get a reference to packet finder's buffer.
 
       lockDataAccess();
-//      std::cout<<"data_buffer.size:"<<data_buffer.size()<<std::endl;
+      std::cout<<"data_buffer.size:"<<data_buffer.size()<<std::endl;
 
 
       while (data_buffer.size() >0)
